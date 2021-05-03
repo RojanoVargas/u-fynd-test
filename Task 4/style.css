@@ -1,0 +1,123 @@
+/* ---colors--- */
+.white{color: white;}
+.space_gray{color: #919191}
+.bg-color-black {background-color: black}
+
+/* ---align--- */
+.center{text-align: center;}
+.left{text-align: left;}
+.right{text-align: right;}
+
+/* ---general--- */
+body {
+    margin: 0;
+  }
+/* ---fonts--- */
+p{
+    font: 20px Arial,Verdana,sans-serif;
+    margin: auto;
+}
+h1 {
+    font: 85px Arial,Verdana,sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.2em;
+    margin: auto;
+}
+h2 {
+    font: 46px Arial,Verdana,sans-serif;
+    font-weight: 400;
+    line-height: 1.2em;
+    text-transform: uppercase;
+}
+h3{
+    font: 20px Arial,Verdana,sans-serif;
+    font-weight: 400;
+    line-height: 1.2em;
+    text-transform: uppercase;
+}
+.full-width-row{
+    width: 100%;
+}
+
+.box-row{
+    max-width: 860px;
+}
+
+
+/* ---by sections--- */
+
+/* header */
+.header{
+    padding: 300px 0;
+    background-image: url("images/background-header.jpg");
+    background-color:  black;
+}
+.paragraph{
+    padding: 150px 0 100px 0;
+    margin: auto;
+}
+/* 3 columns numbers */
+.three-columns-numbers{
+    padding-bottom:150px;
+}
+.column{
+    float: left;
+    width: 33.3%;
+}
+.column-row{
+    margin: auto;
+}
+.column-row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* dynamic numbers */
+@property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+  
+  .numbers {
+    animation: counter 2s infinite alternate ease-in-out;
+    animation-iteration-count: 1;
+    counter-reset: num var(--num);
+    font: 85px Arial,Verdana,sans-serif;
+    padding: 2rem;
+    animation-fill-mode: forwards;
+  }
+  .numbers::after {
+    content: counter(num);
+  }
+  
+  @keyframes counter {
+    from {
+      --num: 0;
+    }
+    to {
+      --num: 10000;
+    }
+  }
+  
+  .numbers2{
+      font: 85px Arial,Verdana,sans-serif;
+      padding: 2rem;
+  }
+  
+  .numbers3 {
+
+    animation: counter 2s infinite alternate ease-in-out;
+    animation-iteration-count: 1;
+    counter-reset: num var(--num);
+    font: 85px Arial,Verdana,sans-serif;
+    padding: 2rem;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+  }
+  .numbers3::after {
+    content: counter(num);
+  }
