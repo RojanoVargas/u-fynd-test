@@ -16,6 +16,7 @@ body {
 p{
     font: 20px Arial,Verdana,sans-serif;
     margin: auto;
+    line-height: 1.2em;
 }
 h1 {
     font: 85px Arial,Verdana,sans-serif;
@@ -29,12 +30,19 @@ h2 {
     font-weight: 400;
     line-height: 1.2em;
     text-transform: uppercase;
+    margin: auto;
 }
 h3{
-    font: 20px Arial,Verdana,sans-serif;
+    font: 30px Arial,Verdana,sans-serif;
     font-weight: 400;
     line-height: 1.2em;
     text-transform: uppercase;
+    margin: auto;
+}
+h4{
+  font: 26px Arial,Verdana,sans-serif;
+  font-weight: 400;
+  line-height: 1.2em;
 }
 .full-width-row{
     width: 100%;
@@ -49,13 +57,28 @@ h3{
 
 /* header */
 .header{
-    padding: 300px 0;
-    background-image: url("images/background-header.jpg");
-    background-color:  black;
+  padding: 300px 0;
+  background-image: url("images/background-header.jpg");
+  background-color:  black;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+/* If later I need to turn off the parallax, I can do it with this media query:
+@media only screen and (max-device-width: 1366px) {
+  .header {
+    background-attachment: scroll;
+  }
+} */
 .paragraph{
     padding: 150px 0 100px 0;
     margin: auto;
+    line-height: 1.5em;
+}
+.paragraph p{
+  line-height: 1.8em;
+  font-size: 24px;
 }
 /* 3 columns numbers */
 .three-columns-numbers{
@@ -73,7 +96,6 @@ h3{
     display: table;
     clear: both;
 }
-
 
 /* dynamic numbers */
 @property --num {
@@ -102,7 +124,6 @@ h3{
       --num: 10000;
     }
   }
-  
   .numbers2{
       font: 85px Arial,Verdana,sans-serif;
       padding: 2rem;
@@ -121,3 +142,88 @@ h3{
   .numbers3::after {
     content: counter(num);
   }
+
+/* CTA */
+.cta{
+  background-image: url("images/background-cta.jpg");
+  background-color:  black;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.cta div{
+  margin: auto;
+  padding: 400px 0;
+}
+.btn{
+  font: 15px Arial,Verdana,sans-serif;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: white solid 1px;
+  padding: 20px 18px;
+  text-decoration: none;
+  /*necessary staff for special hover*/
+  position: relative;
+  outline: 0;
+  overflow:hidden;
+  background: none;
+  z-index: 1;
+  transition:         0.08s ease-in;
+  -o-transition:      0.08s ease-in;
+  -ms-transition:     0.08s ease-in;
+  -moz-transition:    0.08s ease-in;
+  -webkit-transition: 0.08s ease-in;
+}
+.fill:hover{
+  color: black;
+}
+.fill:before{
+  content: "";
+  position: absolute;
+  background: white;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: -1;
+  -webkit-transition: top 0.15s ease-in;
+}
+.fill:hover:before {
+  top: 0;
+}
+
+/* video */
+.video{
+  padding:0;
+}
+.video div{
+  padding: 100px 0 100px 0;
+  margin: auto;
+}
+
+/* form */
+.pre-form{
+  margin: auto;
+}
+.pre-form p{
+  font-size:20px;
+  padding-top: 20px;
+}
+.form{
+  margin: auto;
+  margin-top: 50px;
+  max-width: 840px;
+  border: white solid 1px;
+}
+.form-name{
+  width: 40%;
+  padding: 10px 15px;
+  margin: 20px 20px;
+  text-align: center;
+  font-size: 20px;
+}
+.countries{
+  text-align: right;
+}
