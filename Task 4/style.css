@@ -10,8 +10,10 @@
 
 /* ---general--- */
 body {
-    margin: 0;
-  }
+  margin: 0;
+  /* overflow: hidden;
+  height: 100%; */
+}
 /* ---fonts--- */
 p{
     font: 20px Arial,Verdana,sans-serif;
