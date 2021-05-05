@@ -85,7 +85,7 @@ h4{
     padding-bottom:150px;
 }
 .column{
-    float: left;
+    float: left; 
     width: 33.3%;
 }
 .column-row{
@@ -103,13 +103,12 @@ h4{
     initial-value: 0;
     inherits: false;
   }
-  
   .numbers {
     animation: counter 2s infinite alternate ease-in-out;
     animation-iteration-count: 1;
     counter-reset: num var(--num);
     font: 85px Arial,Verdana,sans-serif;
-    padding: 2rem;
+    /* padding: 32px; */
     animation-fill-mode: forwards;
   }
   .numbers::after {
@@ -126,16 +125,31 @@ h4{
   }
   .numbers2{
       font: 85px Arial,Verdana,sans-serif;
-      padding: 2rem;
+      /* padding: 32px; */
+      position: relative;
   }
-  
-  .numbers3 {
+ 
+    .numbers2::after{
+      content:url("https://64.media.tumblr.com/91bf9172a73d157bf4fe7fede6dc7a64/22cb9850dfb09a9d-a6/s500x750/afd6e2c1aed67d32cc759a5e2b99ea858d5d141c.gifv");
+      position: absolute;
+      z-index: 1;
+      left: -800px;
+      top: 0;
+    }
+    .numbers2::before{
+      content:url("https://64.media.tumblr.com/91bf9172a73d157bf4fe7fede6dc7a64/22cb9850dfb09a9d-a6/s500x750/afd6e2c1aed67d32cc759a5e2b99ea858d5d141c.gifv");
+      position: absolute;
+      z-index: 1;
+      right: -800px;
+      top: 0;
+    }
 
+  .numbers3 {
     animation: counter 2s infinite alternate ease-in-out;
     animation-iteration-count: 1;
     counter-reset: num var(--num);
     font: 85px Arial,Verdana,sans-serif;
-    padding: 2rem;
+    /* padding: 32px; */
     animation-fill-mode: forwards;
     animation-delay: 2s;
   }
@@ -214,16 +228,40 @@ h4{
 .form{
   margin: auto;
   margin-top: 50px;
-  max-width: 840px;
+  max-width: 500px;
   border: white solid 1px;
+  padding: 35px 0 60px 0;
 }
 .form-name{
-  width: 40%;
+  width: 80%;
   padding: 10px 15px;
   margin: 20px 20px;
-  text-align: center;
+  text-align: left;
   font-size: 20px;
 }
+.label{
+  font: 20px Arial,Verdana,sans-serif;
+  /* margin: 0 200px; */
+  text-align: left;
+}
 .countries{
-  text-align: right;
+  width: 86%;
+}
+.vr-own{
+  font: 20px Arial,Verdana,sans-serif;
+  color: white;
+}
+input[type=submit] {
+  width: 45%;
+  background-color: white;
+  font: 20px Arial,Verdana,sans-serif;
+  color: black;
+  padding: 14px 20px;
+  margin: 25px 0;
+  border: white solid 1px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: black;
+  color: white;
 }
