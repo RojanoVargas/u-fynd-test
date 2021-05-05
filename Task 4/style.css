@@ -27,6 +27,11 @@ h1 {
     line-height: 1.2em;
     margin: auto;
 }
+@media only screen and (max-width:560px) {
+  h1{
+    font-size: 40px;
+  }
+}
 h2 {
     font: 46px Arial,Verdana,sans-serif;
     font-weight: 400;
@@ -70,8 +75,8 @@ h4{
   background-repeat: no-repeat;
   background-size: cover;
 }
-/* If later I need to turn off the parallax, I can do it with this media query:
-@media only screen and (max-device-width: 1366px) {
+/* If later I need to turn off the parallax, I can do it with this media query: */
+/* @media only screen and (max-device-width: 560px) {
   .header {
     background-attachment: scroll;
   }
