@@ -47,11 +47,14 @@ h4{
 .full-width-row{
     width: 100%;
 }
-
+.box-row{
+  max-width: 640px;
+}
+@media only screen and (min-width: 960px) {
 .box-row{
     max-width: 860px;
 }
-
+}
 
 /* ---by sections--- */
 
@@ -87,6 +90,12 @@ h4{
 .column{
     float: left; 
     width: 33.3%;
+}
+@media only screen and (max-width: 960px) {
+  .column{
+    width: 100%;
+    padding-top: 40px;
+  }
 }
 .column-row{
     margin: auto;
@@ -128,7 +137,7 @@ h4{
       /* padding: 32px; */
       position: relative;
   }
- 
+  @media only screen and (min-width: 1920px) {
     .numbers2::after{
       content:url("https://64.media.tumblr.com/91bf9172a73d157bf4fe7fede6dc7a64/22cb9850dfb09a9d-a6/s500x750/afd6e2c1aed67d32cc759a5e2b99ea858d5d141c.gifv");
       position: absolute;
@@ -143,7 +152,7 @@ h4{
       right: -800px;
       top: 0;
     }
-
+  }
   .numbers3 {
     animation: counter 2s infinite alternate ease-in-out;
     animation-iteration-count: 1;
