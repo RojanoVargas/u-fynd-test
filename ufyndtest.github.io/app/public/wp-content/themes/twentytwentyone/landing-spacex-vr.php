@@ -13,7 +13,8 @@ get_header( 'landing' ); ?>
         <?php if ( has_post_thumbnail() ) { ?>
          
             <h2 class="entry-title desktop"><?php the_title(); ?></h2>
-         
+            <p> This text in every page</p>
+            <p> And this one too</p>
             <div class="quarter right"> 
                 <?php the_post_thumbnail( 'large' ); ?>
             </div>
@@ -28,7 +29,8 @@ get_header( 'landing' ); ?>
         else { ?>
          
             <h2 class="entry-title desktop"><?php the_title(); ?></h2>
-     
+            <p> Hello, there, bro</p>
+            <p> How are you?</p>
             <section class="entry-content">
                 <?php the_content(); ?>
             </section><!-- .entry-content -->   
