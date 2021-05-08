@@ -24,7 +24,7 @@ I have been testing my solutions on a local WordPress. Anything can be shown on 
 
 Fun fact: when I tried to retrieve data from the API of V4 (instead of V3), this video url was printed on the screen: https://www.youtube.com/watch?v=RfiQYRn7fBg and it didn't let me access any of the API content.
 
-![alt text](src="img/2Toolbar.jpg")
+![plugin ACF](https://ireneyeloy.com/wp-content/uploads/2021/05/1.-ACF-Plugin-install-and-activate.jpg)
 
 Task 4
 1. I created a wireframe to have a clear overview of the skeletal outline of the landing that can be visited here: https://wireframe.cc/IBNojS
