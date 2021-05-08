@@ -16,47 +16,23 @@ endwhile; // End of the loop.
 <html>
 	<a href="/history">Go to history</a>
 </html>
-<?php
-//with curl
-$curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api.spacexdata.com/v3/launches',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-));
+<?php 
+$loop = new WP_Query( array( 'post_type' => 'launch', 'posts_per_page' => 1000 ) ); 
 
-$response = curl_exec($curl);
+while ( $loop->have_posts() ) : $loop->the_post();
 
-curl_close($curl);
-echo $response;
+the_title( '<h2 class="entry-title"><a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a></h2>' ); 
+?>
 
-//without it
+    <div class="entry-content">
+        <?php the_content(); ?>
+    </div>
 
-// require_once 'HTTP/Request2.php';
-// $request = new HTTP_Request2();
-// $request->setUrl('https://api.spacexdata.com/v3/launches');
-// $request->setMethod(HTTP_Request2::METHOD_GET);
-// $request->setConfig(array(
-//   'follow_redirects' => TRUE
-// ));
-// try {
-//   $response = $request->send();
-//   if ($response->getStatus() == 200) {
-//     echo $response->getBody();
-//   }
-//   else {
-//     echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-//     $response->getReasonPhrase();
-//   }
-// }
-// catch(HTTP_Request2_Exception $e) {
-//   echo 'Error: ' . $e->getMessage();
-// }
+<?php endwhile; ?>
 
-get_footer();
+
+
+
+
+  <?php get_footer();

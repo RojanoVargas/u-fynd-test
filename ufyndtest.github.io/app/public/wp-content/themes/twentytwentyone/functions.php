@@ -632,39 +632,39 @@ add_action( 'wp_footer', 'twentytwentyone_add_ie_class' );
 
 //START Delete??
 // Our custom post type function
-function create_posttype() {
+// function create_posttype() {
  
-    register_post_type( 'launches',
+//     register_post_type( 'launches',
     // CPT Options
-        array(
-            'labels' => array(
-                'name' => __( 'Launches' ),
-                'singular_name' => __( 'Launch' )
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'launches'),
-            'show_in_rest' => true,
+//         array(
+//             'labels' => array(
+//                 'name' => __( 'Launches' ),
+//                 'singular_name' => __( 'Launch' )
+//             ),
+//             'public' => true,
+//             'has_archive' => true,
+//             'rewrite' => array('slug' => 'launches'),
+//             'show_in_rest' => true,
  
-        )
-    );
-}
-// Hooking up our function to theme setup
-add_action( 'init', 'create_posttype' );
-//END Delete??
+//         )
+//     );
+// }
+// // Hooking up our function to theme setup
+// add_action( 'init', 'create_posttype' );
+// //END Delete??
 
 
-//creation of custom post type for the launches
-add_action( 'init', 'launches_cpt' );
-function launches_cpt() {
-    $args = array(
-      'public'       => true,
-      'show_in_rest' => true,
-      'label'        => 'Launches2'
-	//   'capability_type' => 'post'
-    );
-    register_post_type( 'launch2', $args );
-}
+// //creation of custom post type for the launches
+// add_action( 'init', 'launches_cpt' );
+// function launches_cpt() {
+//     $args = array(
+//       'public'       => true,
+//       'show_in_rest' => true,
+//       'label'        => 'Launches2'
+// 	//   'capability_type' => 'post'
+//     );
+//     register_post_type( 'launch2', $args );
+// }
 
 // function get_launches_from_api(){
 
@@ -704,35 +704,255 @@ function launches_cpt() {
  * 
  * It mostly let the user add categories to the launches
  */
-add_action( 'init', 'my_book_taxonomy', 30 );
-function my_book_taxonomy() {
+// add_action( 'init', 'my_book_taxonomy', 30 );
+// function my_book_taxonomy() {
  
-  $labels = array(
-    'name'              => _x( 'Type of launch', 'taxonomy general name' ),
-    'singular_name'     => _x( 'Launch type', 'taxonomy singular name' ),
-    'search_items'      => __( 'Search types os launches' ),
-    'all_items'         => __( 'All Launches' ),
-    'parent_item'       => __( 'Parent Launch' ),
-    'parent_item_colon' => __( 'Parent Launch:' ),
-    'edit_item'         => __( 'Edit Launch' ),
-    'update_item'       => __( 'Update Launch' ),
-    'add_new_item'      => __( 'Add New Launch' ),
-    'new_item_name'     => __( 'New Launch Name' ),
-    'menu_name'         => __( 'Launch' ),
-  );
+//   $labels = array(
+//     'name'              => _x( 'Type of launch', 'taxonomy general name' ),
+//     'singular_name'     => _x( 'Launch type', 'taxonomy singular name' ),
+//     'search_items'      => __( 'Search types os launches' ),
+//     'all_items'         => __( 'All Launches' ),
+//     'parent_item'       => __( 'Parent Launch' ),
+//     'parent_item_colon' => __( 'Parent Launch:' ),
+//     'edit_item'         => __( 'Edit Launch' ),
+//     'update_item'       => __( 'Update Launch' ),
+//     'add_new_item'      => __( 'Add New Launch' ),
+//     'new_item_name'     => __( 'New Launch Name' ),
+//     'menu_name'         => __( 'Launch' ),
+//   );
  
-  $args = array(
-    'hierarchical'          => true,
-    'labels'                => $labels,
-    'show_ui'               => true,
-    'show_admin_column'     => true,
-    'query_var'             => true,
-    'rewrite'               => array( 'slug' => 'genre' ),
-    'show_in_rest'          => true,
-    'rest_base'             => 'launch',
-    'rest_controller_class' => 'WP_REST_Terms_Controller',
-  );
+//   $args = array(
+//     'hierarchical'          => true,
+//     'labels'                => $labels,
+//     'show_ui'               => true,
+//     'show_admin_column'     => true,
+//     'query_var'             => true,
+//     'rewrite'               => array( 'slug' => 'genre' ),
+//     'show_in_rest'          => true,
+//     'rest_base'             => 'launch',
+//     'rest_controller_class' => 'WP_REST_Terms_Controller',
+//   );
  
-  register_taxonomy( 'launch', array( 'launch2' ), $args );
+//   register_taxonomy( 'launch', array( 'launch2' ), $args );
  
+// }
+
+
+/*-----------------Breweries
+
+add_action( 'init', 'register_brewery_cpt');
+function register_brewery_cpt() {
+	register_post_type('brewery', [
+		'label' => 'Breweries',
+		'public' => true,
+		'capability_type' => 'post'
+	]);
+}
+
+
+if( ! wp_next_scheduled('update_brewery_list') ){
+	wp_schedule_event(time(), 'weekly', 'get_breweries_from_api');
+}//weekly updates the breweries (if there's anything new)
+
+
+add_action('wp_ajax_nopriv_get_breweries_from_api', 'get_breweries_from_api');//let us run the API wether we are not logged in
+add_action('wp_ajax_get_breweries_from_api', 'get_breweries_from_api');//or wether we are
+function get_breweries_from_api(){
+
+	$file = get_stylesheet_directory() . '/report.txt';
+	$current_page = ( ! empty($_POST['current_page']) ) ? $_POST['current_page'] : 1;
+	$breweries = [];
+
+	$results = wp_remote_retrieve_body( wp_remote_get('https://api.openbrewerydb.org/breweries/?page=' . $current_page. '&per_page=50'));
+	file_put_contents($file, "Current Page: " . $current_page. "\n\n", FILE_APPEND);
+
+
+	$results = json_decode($results);
+
+	if ( ! is_array( $results ) || empty ( $results ) ){
+		return false;
+	}
+
+	$breweries[] = $results;
+
+	foreach( $breweries[0] as $brewery ){ //we can work individually with each brewery
+
+		$brewery_slug = sanitize_title($brewery->name . '-' . $brewery->id);
+
+	
+		$existing_brewery = get_page_by_path($brewery_slug, 'OBJECT', 'brewery');
+
+		if( $existing_brewery === null ){
+
+			$inserted_brewery = wp_insert_post([
+				'post_name' => $brewery_slug,
+				'post_title' => $brewery_slug,
+				'post_type' => 'brewery',
+				'post_status' => 'publish'
+			]);
+
+
+			if ( is_wp_error( $inserted_brewery ) ) {
+				continue;
+			}
+
+			$fillable = [
+				'field_60955a3161500' => 'name',
+				'field_60955a4661501' => 'brewery_type',
+				'field_60955a5761502' => 'street',
+				'field_60955a6a61503' => 'city',
+				'field_60955a7361504' => 'state',
+				'field_60955a7b61505' => 'postal_code',
+				'field_60955a8d61506' => 'country',
+				'field_60955a9261507' => 'longitude',
+				'field_60955a9e61508' => 'latitude',
+				'field_60955aa761509' => 'phone',
+				'field_60955ab06150a' => 'website',
+				'field_60955abc6150b' => 'updated_at',
+			];
+
+			foreach ( $fillable as $key => $name ) {
+				update_field( $key, $brewery->$name, $inserted_brewery );
+			}
+		}else {
+
+			$existing_brewery_id = $existing_brewery->ID;
+			$existing_brewery_timestamp = get_field('updated_at', $existing_brewery_id);
+
+			if( $brewery->updated_at >= $existing_brewery_timestamp ){
+				$fillable = [
+					'field_60955a3161500' => 'name',
+					'field_60955a4661501' => 'brewery_type',
+					'field_60955a5761502' => 'street',
+					'field_60955a6a61503' => 'city',
+					'field_60955a7361504' => 'state',
+					'field_60955a7b61505' => 'postal_code',
+					'field_60955a8d61506' => 'country',
+					'field_60955a9261507' => 'longitude',
+					'field_60955a9e61508' => 'latitude',
+					'field_60955aa761509' => 'phone',
+					'field_60955ab06150a' => 'website',
+					'field_60955abc6150b' => 'updated_at',
+				];
+	
+				foreach ( $fillable as $key => $name ) {
+					update_field( $key, $brewery->$name, $existing_brewery_id );
+				}
+			}
+
+
+		}
+
+	}
+
+	$current_page = $current_page + 1;
+	wp_remote_post( admin_url('admin-ajax.php?action=get_breweries_from_api'), [
+		'blocking' => false,
+		'sslverify' => false, 
+		'body' => [
+			'current_page' => $current_page
+		]
+	] );
+
+}
+-----------------Breweries-----------------*/
+
+/*----------------------------------------------launches---------------------------------------------*/
+
+add_action( 'init', 'register_launch_cpt');
+function register_launch_cpt() {
+	register_post_type('launch', [
+		'label' => 'Launches',
+		'public' => true,
+		'capability_type' => 'post'
+	]);
+}//creating custom post type
+
+
+if( ! wp_next_scheduled('update_launch_list') ){
+	wp_schedule_event(time(), 'weekly', 'get_launches_from_api');
+}//weekly updates the launches (if there's anything new)
+
+
+add_action('wp_ajax_nopriv_get_launches_from_api', 'get_launches_from_api');//let us run the API wether we are not logged in
+add_action('wp_ajax_get_launches_from_api', 'get_launches_from_api');//or wether we are
+function get_launches_from_api(){
+
+	$file = get_stylesheet_directory() . '/report.txt';
+	$current_page = ( ! empty($_POST['current_page']) ) ? $_POST['current_page'] : 1;
+	$launches = [];
+
+	$results = wp_remote_retrieve_body( wp_remote_get('https://api.spacexdata.com/v3/launches/?page=' . $current_page. '&per_page=50'));
+	file_put_contents($file, "Current Page: " . $current_page. "\n\n", FILE_APPEND);
+
+
+	$results = json_decode($results); //decode
+
+	if ( ! is_array( $results ) || empty ( $results ) ){
+		return false;
+	}
+
+	$launches[] = $results;
+
+	foreach( $launches[0] as $launch ){ //we can work individually with each launch
+
+		$launch_slug = sanitize_title($launch->mission_name . '-' . $launch->flight_number);
+
+		/*-- Start making sure the content is updated */
+		$existing_launch = get_page_by_path($launch_slug, 'OBJECT', 'launch');
+
+		if( $existing_launch === null ){
+
+			$inserted_launch = wp_insert_post([
+				'post_name' => $launch_slug,
+				'post_title' => $launch_slug,
+				'post_type' => 'launch',
+				'post_status' => 'publish'
+			]); //Get all data and create a new custom post type
+
+
+			if ( is_wp_error( $inserted_launch ) ) {
+				continue;
+			}
+
+			$fillable = [
+				'field_6095932a53d5e' => 'flight_number',
+				'field_6095b25d0f9d9' => 'mission_name',
+				'field_6095b2720f9da' => 'launch_year',
+			];
+
+			foreach ( $fillable as $key => $name ) {
+				update_field( $key, $launch->$name, $inserted_launch ); //update_field is from ACF plugin
+			}
+		}else {
+
+			$existing_launch_id = $existing_launch->ID;
+			$existing_launch_timestamp = get_field('updated_at', $existing_launch_id);
+
+			if( $launch->updated_at >= $existing_launch_timestamp ){
+				$fillable = [
+					'field_6095932a53d5e' => 'flight_number',
+					'field_6095b25d0f9d9' => 'mission_name',
+					'field_6095b2720f9da' => 'launch_year',
+				];
+	
+				foreach ( $fillable as $key => $name ) {
+					update_field( $key, $launch->$name, $existing_launch_id );
+				}
+			}
+
+
+		}
+
+	}
+
+	$current_page = $current_page + 1;
+	wp_remote_post( admin_url('admin-ajax.php?action=get_launches_from_api'), [
+		'blocking' => false,
+		'sslverify' => false, //to work locally, so we don't have to verify the SSL
+		'body' => [
+			'current_page' => $current_page
+		]
+	] );
+
 }
