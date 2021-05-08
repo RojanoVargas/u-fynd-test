@@ -10,7 +10,8 @@
 <body>
 <!-------------- START Header -------------->
   <section class="header full-width-row center">
-    <h1 class="white box-row"><img src="images/spacex-logo-white-48px.png"><br> VR EXCURSIONS</h1>
+    <img src="images/spacex-logo-white-48px.png">
+    <h1 class="white box-row">VR EXCURSIONS</h1>
     <h3 class="white">Take off from your sofa</h3>
   </section>
 <!-------------- END Header -------------->
@@ -61,18 +62,18 @@
 </section>
 <!-------------- END Video -------------->
 
-<!-------------- START Form -------------->
-<section class="full-width-row center bg-color-black paragraph" >
+<!-------------- START Form (shows data on url after submit - all fields are required) -------------->
+<section class="full-width-row center bg-color-black">
   <div class="box-row white pre-form">
     <h2>Join the crew</h2>
     <p>You only need to fill our form and we will get in touch with you with more information. Fasten your seatbelts, we are about to launch:</p>
   </div>
   <div class="form" id="form-sign-up">  
     <form>
-      <input type="text" name="first-name" placeholder="First name" class="form-name">
-      <input type="text" name="last-name" placeholder="Last name" class="form-name">
+      <input type="text" name="first-name" placeholder="First name" class="form-name" required>
+      <input type="text" name="last-name" placeholder="Last name" class="form-name" required>
       <label for="countries" class="white label">Country of residence</label>
-      <select name="countries" class="form-name countries">
+      <select name="countries" class="form-name countries" required>
         <option value=""></option>
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
@@ -323,24 +324,19 @@
         <option value="Zimbabwe">Zimbabwe</option>
       </select><br>
       <label for="birthday" class="white label">Date of birth</label>
-      <input type="date" name="birthday" class="form-name"><br><br>
+      <input type="date" name="birthday" class="form-name" required><br><br>
       <label class="white label">Do you own VR glasses?</label><br><br>
-      <input type="radio" value="yes" name="own">
+      <input type="radio" value="yes" name="own" required>
       <label for="yes" class="vr-own">Yes</label>
       <input type="radio" value="no" name="own">
       <label for="no" class="vr-own">No</label><br>
-      <input type="email" name="email" placeholder="Email" class="form-name">
+      <input type="email" name="email" placeholder="Email" class="form-name" required>
       <input type="submit" value="Sign up" class="submit-btn submit-fill"><br>
-      <input type="checkbox" name="privacy" value="privacy">
+      <input type="checkbox" name="privacy" value="privacy" required>
       <label for="privacy" class="white"> I have read and I accept SpaceX website <a href="https://www.spacex.com/media/privacy_policy_spacex.pdf" target="_blank">privacy policy</a>.</label>
     </form>
   </div>
 </section>
-<!-------------- END Form -------------->
 
-<!-------------- START Extra message (optional) -------------->
-<!-------------- END Extra message (optional) -------------->
-<!-------------- START Logo/Footer (optional) -------------->
-<!-------------- END Logo/Footer (optional) -------------->
 </body>
 </html>
